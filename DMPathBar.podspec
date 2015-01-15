@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/malcommac/DMPathBar"
   s.license          = 'MIT'
   s.author           = 'Daniele Margutti'
-  s.source           = { :git => "https://github.com/malcommac/DMPathBar", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/malcommac/DMPathBar.git", :tag => s.version.to_s }
 
   s.platform     = :osx, '10.9'
   s.requires_arc = true
