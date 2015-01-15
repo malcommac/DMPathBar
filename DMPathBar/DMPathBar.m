@@ -427,9 +427,10 @@
 	CGFloat availableWidth = CGRectGetWidth(self.contentRect)-arrowIconsSpace;
 	CGFloat requiredWidth = 0.0f;
 	CGSize contentSize = NSMakeSize(availableWidth, CGRectGetHeight(self.contentRect));
-	for (DMPathBarItem *item in itemsArray)
+	for (DMPathBarItem *item in itemsArray) {
+		item.pathBar = self;
 		requiredWidth += [item bestContentSizeWithMax: contentSize].width;
-	
+	}
 	requiredWidth = roundf(requiredWidth);
 	
 	CGFloat compressionPerItem = 0.0f;
