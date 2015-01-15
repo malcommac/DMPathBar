@@ -82,8 +82,9 @@
 }
 
 - (IBAction)buttonSetItemTitle:(id)sender {
+	__weak __typeof__(pathBar) weakPathBar = pathBar;
 	[pathBar setTitleItem:[DMPathBarItem itemWithTitle:@"New Title" icon:nil] animated:YES completion:^{
-		NSLog(@"Changed path bar item: %@",pathBar.items.firstObject);
+		NSLog(@"Changed path bar item: %@",weakPathBar.items.firstObject);
 	}];
 }
 

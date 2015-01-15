@@ -65,9 +65,6 @@
 
 - (instancetype)initWithCustomView:(NSView *) aCustomView {
 	if (self = [self init]) {
-		self.wantsLayer = YES;
-		//self.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
-		
 		_title = nil;
 		_icon = nil;
 		_customView = aCustomView;
@@ -84,6 +81,10 @@
 - (instancetype) init {
 	self = [super initWithFrame:NSZeroRect];
 	if (self) {
+		self.wantsLayer = YES;
+		self.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
+
+		_enabled = YES;
 		fldTitle = [[NSTextField alloc] initWithFrame:NSZeroRect];
 		fldTitle.wantsLayer = YES;
 		fldTitle.autoresizingMask = NSViewWidthSizable;
@@ -98,9 +99,6 @@
 
 - (instancetype)initWithTitle:(NSString *) aTitle icon:(NSImage *) aIcon {
 	if (self = [self init]) {
-		self.wantsLayer = YES;
-		self.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
-
 		_title = aTitle;
 		_icon = aIcon;
 		_customView = nil;
@@ -122,6 +120,11 @@
 										 NSParagraphStyleAttributeName	: paragraph};
 	}
 	return self;
+}
+
+- (void)setEnabled:(BOOL)enabled {
+	_enabled = enabled;
+	[self layoutSubviews];
 }
 
 - (void)setInactiveTitleAttributes:(NSDictionary *)inactiveTitleAttributes {
@@ -169,7 +172,7 @@
 	
 	BOOL isTitleItem = ([_pathBar.items indexOfObject:self] == 0);
 	NSDictionary *textAttrsDict;
-	if (isKeyWindow && isEnabled)
+	if (isKeyWindow && isEnabled && _enabled)
 		textAttrsDict = (isTitleItem ? _boldActiveTitleAttributes : _activeTitleAttributes);
 	else
 		textAttrsDict = (isTitleItem ? _boldInactiveTitleAttributes : _inactiveTitleAttributes);

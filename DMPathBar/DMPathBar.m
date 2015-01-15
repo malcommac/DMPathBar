@@ -570,7 +570,7 @@
 		return;
 	}
 	DMPathBarItem *item = [self itemAtPoint: [self convertPoint:theEvent.locationInWindow fromView:nil]];
-	if (!item) {
+	if (!item || !item.enabled) {
 		[super mouseDown:theEvent];
 		return;
 	}

@@ -12,8 +12,8 @@
 #import "DMPathBarItem.h"
 
 typedef NS_ENUM(NSInteger, DMPathBarAccessoryPos) {
-	DMPathBarAccessoryPosLeft,
-	DMPathBarAccessoryPosRight
+	DMPathBarAccessoryPosLeft,		// Accessory view located on the left side of the bar
+	DMPathBarAccessoryPosRight		// Accessory view located on the right side of the bar
 };
 
 typedef NSMenu*(^DMPathBarAction)(NSInteger index,DMPathBarItem *item);
