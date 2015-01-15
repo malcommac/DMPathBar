@@ -192,7 +192,7 @@
 	if (_title) {
 		NSSize singleLineSize = [_title boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:opt attributes:textAttrsDict].size;
 		NSSize titleSize = [_title boundingRectWithSize:self.bounds.size options:opt attributes:textAttrsDict].size;
-		titleSize.width += (kDMPathBarItemTextFieldBorder*2);
+		titleSize.width += kDMPathBarItemTextFieldBorder;
 		NSRect titleRect = NSMakeRect(offsetX, roundf( (CGRectGetHeight(self.bounds)-singleLineSize.height)/2.0f)-2,
 									  titleSize.width, singleLineSize.height);
 		fldTitle.stringValue = _title;
@@ -225,9 +225,12 @@
 	if (_customView)
 		return _customView.frame.size;
 	
+	BOOL isTitleItem = ([_pathBar.items indexOfObject:self] == 0);
+
 	NSStringDrawingOptions opt = (NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading);
-	NSSize titleSize = [_title boundingRectWithSize:maxSize options:opt attributes:_boldActiveTitleAttributes].size; // worst scenario is bold
-	titleSize.width += (kDMPathBarItemTextFieldBorder*2);
+	NSSize titleSize = [_title boundingRectWithSize:maxSize options:opt
+										 attributes:(isTitleItem ? _boldActiveTitleAttributes : _activeTitleAttributes)].size;
+	titleSize.width += kDMPathBarItemTextFieldBorder;
 	NSSize iconSize = _icon.size;
 	
 	CGFloat maxHeight = MAX(titleSize.height,iconSize.height);

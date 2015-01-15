@@ -10,7 +10,6 @@
 #import <Cocoa/Cocoa.h>
 
 #import "DMPathBarItem.h"
-#import "DMPathBarProgressIndicator.h"
 
 typedef NS_ENUM(NSInteger, DMPathBarAccessoryPos) {
 	DMPathBarAccessoryPosLeft,		// Accessory view located on the left side of the bar
@@ -42,10 +41,6 @@ IB_DESIGNABLE
 @property (nonatomic,copy)		DMPathBarAction			 action;
 @property (nonatomic,assign)	BOOL					 enabled;				// YES to make the control interactive, NO to disable all
 
-// Progress Bar Support
-@property (nonatomic,retain)	NSColor					*progressColor;
-@property (nonatomic,readonly)	DMPathBarProgressIndicator	*progressBar;
-
 // Set the title item of the navigation bar. Title is a normal DMPathBarItem object with a bold style
 - (void) setTitleItem:(DMPathBarItem *) aItem animated:(BOOL) aAnimated completion:(void (^)(void)) aCompletion;
 
@@ -67,7 +62,6 @@ IB_DESIGNABLE
 
 // Set an accessory NSView to the path bar
 - (void) setAccessoryView:(NSView *)accessoryView animated:(BOOL) aAnimated completion:(void (^)(void)) aCompletion;
-
 
 @end
 
