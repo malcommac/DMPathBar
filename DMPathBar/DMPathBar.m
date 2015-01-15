@@ -55,14 +55,37 @@
 	
 	currentExpandedItemIdx = NSNotFound;
 	_isWindowActive = YES;
+	_progressColor = [NSColor colorWithCalibratedRed:0.163 green:0.385 blue:0.969 alpha:1.000];
 	_backActiveColor = [NSColor whiteColor];
 	_backInactiveColor = [NSColor colorWithCalibratedWhite:0.965 alpha:1.000];
 	_backShadowColor = [NSColor colorWithCalibratedWhite:0.590 alpha:0.2];
 	_backSelectedColor = [NSColor colorWithCalibratedWhite:0.920 alpha:1.000];
 	_cornerRadius = 4.0f;
-	_contentInsets = NSEdgeInsetsMake(1, _cornerRadius, 1, _cornerRadius);
+	_contentInsets = NSEdgeInsetsMake(2, _cornerRadius, 2, _cornerRadius);
 	_arrowIcon = [NSImage imageNamed:@"arrow"];
+	
+	_progressBar = [[DMPathBarProgressIndicator alloc] initWithFrame:NSMakeRect(0, 0, 1, 1)];
+	[self addSubview:_progressBar];
+	//[_progressBar startAnimating];
+	//[self simulateProgress];
 }
+
+- (void)simulateProgress {
+	
+	double delayInSeconds = 2.0;
+	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+		
+		CGFloat increment = (arc4random() % 5) / 10.0f + 0.1;
+		CGFloat progress  = [_progressBar progress] + increment;
+		[_progressBar setProgress:progress];
+		if (progress < 1.0) {
+			
+			[self simulateProgress];
+		}
+	});
+}
+
 
 #pragma mark - Overrides
 
@@ -382,6 +405,11 @@
 	return accessoryRect;
 }
 
+- (void)resizeWithOldSuperviewSize:(NSSize)oldSize {
+	NSRect c = self.contentRect;
+	_progressBar.frame = NSMakeRect(NSMinX(c), NSMaxY(c)+1, NSWidth(c), 1);
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
 	[super drawRect:dirtyRect];
 	if (CGRectEqualToRect(CGRectZero, self.bounds))
@@ -574,10 +602,9 @@
 		[super mouseDown:theEvent];
 		return;
 	}
-	
-	isMouseDown = YES;
-	[self setNeedsDisplay:YES];
 	if (_action) {
+		isMouseDown = YES;
+		[self setNeedsDisplay:YES];
 		NSMenu *returnedMenu = _action([itemsArray indexOfObject:item],item);
 		if (returnedMenu) {
 			NSRect itemRect = item.frame;
