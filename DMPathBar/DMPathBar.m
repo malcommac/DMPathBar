@@ -47,6 +47,7 @@
 	self.wantsLayer = YES;
 	self.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
 
+    _drawsBackground = YES;
 	_enabled = YES;
 	itemsArray = [NSMutableArray array];
 	pathArrows = [NSMutableArray array];
@@ -115,6 +116,11 @@
 - (void)setCornerRadius:(CGFloat)cornerRadius {
 	_cornerRadius = cornerRadius;
 	[self setNeedsDisplay:YES];
+}
+
+- (void)setDrawsBackground:(BOOL)drawsBackground {
+    _drawsBackground = drawsBackground;
+    [self setNeedsDisplay:YES];
 }
 
 - (void)setBackShadowColor:(NSColor *)backShadowColor {
@@ -386,7 +392,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
 	[super drawRect:dirtyRect];
-	if (CGRectEqualToRect(CGRectZero, self.bounds))
+	if (CGRectEqualToRect(CGRectZero, self.bounds) || !_drawsBackground)
 		return;
 	
 	NSRect backPathRect = CGRectMake(0.0f, 0.0f, CGRectGetWidth(_bounds), CGRectGetHeight(_bounds));

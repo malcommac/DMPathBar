@@ -22,6 +22,7 @@ IB_DESIGNABLE
 @interface DMPathBar : NSView
 
 // Appaerance of the path bar
+@property (nonatomic,assign)	BOOL					 drawsBackground;		// YES to make it draw the background, NO to make it transparent, Default is YES
 @property (nonatomic,retain)	NSColor					*backActiveColor;		// Default is white
 @property (nonatomic,retain)	NSColor					*backSelectedColor;		// Default is a light gray
 @property (nonatomic,retain)	NSColor					*backInactiveColor;		// Default is a light gray
@@ -40,6 +41,7 @@ IB_DESIGNABLE
 
 @property (nonatomic,copy)		DMPathBarAction			 action;
 @property (nonatomic,assign)	BOOL					 enabled;				// YES to make the control interactive, NO to disable all
+
 
 // Set the title item of the navigation bar. Title is a normal DMPathBarItem object with a bold style
 - (void) setTitleItem:(DMPathBarItem *) aItem animated:(BOOL) aAnimated completion:(void (^)(void)) aCompletion;
