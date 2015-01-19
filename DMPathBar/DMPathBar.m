@@ -9,7 +9,7 @@
 
 #import "DMPathBar.h"
 
-#define kDMPathBarArrowExtraWidth		6.0f
+#define kDMPathBarArrowExtraWidth		8.0f
 
 @interface DMPathBar () {
 	NSMutableArray		*itemsArray;
@@ -60,7 +60,7 @@
 	_backShadowColor = [NSColor colorWithCalibratedWhite:0.590 alpha:0.2];
 	_backSelectedColor = [NSColor colorWithCalibratedWhite:0.920 alpha:1.000];
 	_cornerRadius = 4.0f;
-	_contentInsets = NSEdgeInsetsMake(1, _cornerRadius, 1, _cornerRadius);
+	_contentInsets = NSEdgeInsetsMake(5, _cornerRadius, 5, _cornerRadius);
 	_arrowIcon = [NSImage imageNamed:@"arrow"];
 }
 
@@ -207,6 +207,8 @@
 		NSArray *itemsToRemove = [itemsArray subarrayWithRange:itemsRange];
 		[itemsToRemove makeObjectsPerformSelector:@selector(removeFromSuperview)];
 		[itemsArray removeObjectsInRange:itemsRange];
+		[pathArrows makeObjectsPerformSelector:@selector(removeFromSuperview)];
+		[pathArrows removeAllObjects];
 		if (aCompletion) aCompletion();
 	} else {
 		if (aSerialRemoveAnimation)
