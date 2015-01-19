@@ -28,6 +28,7 @@ IB_DESIGNABLE
 @property (nonatomic,weak)		DMPathBar		*pathBar;						// Refernece to the parent pathbar (you should not touch it)
 @property (nonatomic,readonly)	BOOL			 isCompressed;					// YES if pathbar is compressed (you should not touch it)
 @property (nonatomic,readonly)	NSSize			 bestContentSize;				// Best size which can contains the path bar item elements
+@property (nonatomic,retain)	id				 representedItem;				// Represented item (any item you can use)
 
 // Create a new item with custom title and icon
 + (instancetype) itemWithTitle:(NSString *) aTitle icon:(NSImage *) aIcon;

@@ -195,6 +195,8 @@
 		titleSize.width += kDMPathBarItemTextFieldBorder;
 		NSRect titleRect = NSMakeRect(offsetX, roundf( (CGRectGetHeight(self.bounds)-singleLineSize.height)/2.0f)-2,
 									  titleSize.width, singleLineSize.height);
+		if (!isTitleItem)
+			titleRect.origin.y+=1;
 		fldTitle.stringValue = _title;
 		fldTitle.font = textAttrsDict[NSFontAttributeName];
 		fldTitle.textColor = textAttrsDict[NSForegroundColorAttributeName];
