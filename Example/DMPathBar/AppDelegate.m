@@ -67,6 +67,9 @@
 - (IBAction) buttonToggleEnabled:(id)sender {
 	pathBar.enabled = !pathBar.enabled;
 }
+- (IBAction) buttonToggleBackground:(id)sender {
+    pathBar.drawsBackground = !pathBar.drawsBackground;
+}
 
 - (IBAction) buttonAddItem:(id)sender {
 	NSImage *icon = (buttonNewItemUseIcon.state == NSOnState ? [NSImage imageNamed:@"icon"] : nil);
