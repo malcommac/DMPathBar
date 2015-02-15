@@ -39,6 +39,7 @@ IB_DESIGNABLE
 // Helper Methods
 - (NSSize) bestContentSizeWithMax:(NSSize) maxSize;
 - (void) setCompressed:(BOOL) aCompressed animated:(BOOL) aAnimated;
+- (void) setTag:(NSInteger)tag;
 - (void) layoutSubviews;
 
 @end
