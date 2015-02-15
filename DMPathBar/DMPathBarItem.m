@@ -46,6 +46,7 @@
 @interface DMPathBarItem () {
 	NSTextField				*fldTitle;
 	DMPathBarGradient		*gradient;
+	NSInteger				_tag;
 }
 
 @property (nonatomic,readonly)	NSRect		titleRect;
@@ -206,6 +207,14 @@
 	}
 	
 	[self layoutSubviews];
+}
+
+- (void) setTag:(NSInteger)tag {
+	_tag = tag;
+}
+
+- (NSInteger)tag {
+	return _tag;
 }
 
 - (void) layoutSubviews {
