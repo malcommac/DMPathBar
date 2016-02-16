@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/DMPathBar.svg?style=flat)](http://cocoadocs.org/docsets/DMPathBar)
 [![Platform](https://img.shields.io/cocoapods/p/DMPathBar.svg?style=flat)](http://cocoadocs.org/docsets/DMPathBar)
 
-DMPathBar is a Path Bar Cocoa control like the one used in XCode to pick Targets or Finder in Yosemite (aka MacOS X 10.10) while browsing along a path.
+DMPathBar is a Path Bar Cocoa control like the one used in Xcode to pick Targets or Finder in Yosemite (aka MacOS X 10.10) while browsing along a path.
 
 I've made it to looks great in Yosemite but you can easily customize it for your needs.
 
