@@ -63,7 +63,23 @@
 	_cornerRadius = 4.0f;
 	_contentInsets = NSEdgeInsetsMake(5, _cornerRadius, 5, _cornerRadius);
 	_arrowIcon = [NSImage imageNamed:@"arrow"];
+	
+	// Register for frame change notifications so that any change
+	// forces the view to redraw/reflow.
+	[self addObserver:self
+		   forKeyPath:@"frame"
+			  options:NSKeyValueObservingOptionNew
+			  context:nil];
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+	if (object == self) {
+		// frame changed; reflow path elements to fill new space or compress with less space
+		[self layoutItems:YES completion:NULL];
+	}
+}
+
 
 #pragma mark - Overrides
 
